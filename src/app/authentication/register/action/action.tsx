@@ -3,7 +3,14 @@ import { RegisterFormDataType } from "../register-schema";
 
 
 export async function RegisterAction(body: RegisterFormDataType) {
-  const res = await api.post('/users', body)
+  
+  try {
+    const res = await api.post('/users', body)
+    
+    return res
+  }catch(err) {
+    console.log(err)
+    throw new Error('Failed to create user')
+  }
 
-  return res
 }

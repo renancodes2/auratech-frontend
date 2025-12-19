@@ -8,12 +8,19 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { FaBars, FaShoppingBag, FaUser } from 'react-icons/fa'
-import { useState } from "react"
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 export function Header() {
 
+  const pathname = usePathname();
+  const isAuthPage = pathname === '/authentication/login' || pathname === '/authentication/register';
+
   const [showModal, setShowModal] = useState(false)
 
+  if(isAuthPage) {
+    return null;
+  }
 
   return (
     <>

@@ -1,5 +1,6 @@
 import { Product } from "@/types/products"
 import { formatPrice } from "@/utils/format-price"
+import { truncate } from "@/utils/truncate"
 import Image from "next/image"
 import Link from "next/link"
 import { FaStar } from "react-icons/fa"
@@ -31,22 +32,24 @@ export function ProductList({ data }: ProductsListProps) {
                 />
               </div>
 
-              <p className="pl-2 font-bold text-xl pt-2">{item.name}</p>
+              <p className="pl-2 font-bold text-xl pt-2">
+                {truncate(item.name, 30)}
+              </p>
 
-              <div className="flex items-center justify-between px-2 pt-2">
+              <div className="flex items-center justify-between px-2 my-2">
                 <div className="flex items-center gap-1">
                   <FaStar size={20} color="#f7db15"/>
                   <p>(530)</p>
                 </div>
                 <div>
                   <p className="font-bold">
-                    <span className="text-red-600">{formatPrice(item.price)}</span>
+                    <span className="text-cyan-400">{formatPrice(item.price)}</span>
                   </p>
                 </div>
               </div>
             
               <p className="text-[#97a0b7] pl-2 mt-1">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam enim laborum maxime necessitatibus assumenda, expedita ipsa temporibus!
+                {truncate(item.description, 200)}
               </p>
 
               <div className="w-full flex items-center justify-between mt-4">

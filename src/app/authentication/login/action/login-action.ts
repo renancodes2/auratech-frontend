@@ -1,8 +1,7 @@
 "use server";
 
-import api from "@/utils/axiosInstance";
+import api from "@/utils/axios-instance";
 import { LoginFormDataType } from "../login-schema";
-import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
 interface LoginActionData {
@@ -15,8 +14,12 @@ export const loginAction = async (data: LoginFormDataType) => {
 
   try {
     if(!data) {
-      throw new NextResponse('Incomplete login data. Please fill in all required fields')
+      return { 
+        success: false,
+        message: 'Incomplete login data. Please fill in all required fields'
+      }
     }
+    
     const response: LoginActionData = (await api.post('/auth', data)).data
 
     const token = response.token;
@@ -39,11 +42,17 @@ export const loginAction = async (data: LoginFormDataType) => {
         name,
         email
       }};
-      
     }
 
-    return null;
+    return {
+      success: false,
+      message: 'Token not received from server.'
+    }
   }catch(err){
-    throw new NextResponse('Authentication failed. Could not generate token')
+    console.log(err)
+    return {
+      success: false,
+      message: 'Authentication failed. Could not generate token'
+    }
   }
 }

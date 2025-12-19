@@ -1,5 +1,4 @@
+
 import { RegisterContent } from "./components/register-content";
 
-export default function Register() {
- return <RegisterContent />
-}
+export default async function Register() { return <RegisterContent /> }
