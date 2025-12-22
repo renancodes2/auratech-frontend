@@ -1,5 +1,5 @@
 "use client"
-import { RegisterFormDataType, useFormRegister } from "../register-schema"
+
 import {
   Form,
   FormControl,
@@ -8,6 +8,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import { RegisterFormDataType, useFormRegister } from "../register-schema"
 import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import { RegisterAction } from "../action/action"
@@ -20,8 +21,8 @@ export function RegisterContent() {
   const handleRegister = async (form: RegisterFormDataType) => {
     const response = await RegisterAction(form)
 
-    if(!response) {
-      throw Error('Failed to create user')
+    if(!response || !response.success) {
+      throw Error(response.message || 'Failed to create user')
     }
 
     router.push('/authenticarion/login')

@@ -1,9 +1,5 @@
-import { getCookie } from "cookies-next"
+import { getCookie, deleteCookie } from "cookies-next"
 
-export function getCookieClient(){
+export function getCookieClient() { return getCookie("session") }
 
-  const token = getCookie("session");
-
-  return token;
-  
-}
+export function deleteCookieClient() { deleteCookie("session") }

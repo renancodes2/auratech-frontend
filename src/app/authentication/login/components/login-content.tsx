@@ -17,7 +17,6 @@ export function LoginContent() {
       toast.error('Error ao fazer login')
       throw new Error(response?.message || 'Authentication failed. Could not generate token');
     }
-
     toast.success('sucesso ao fazer login')
     router.push('/');
   }

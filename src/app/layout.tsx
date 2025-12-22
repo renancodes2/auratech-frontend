@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Inter, Rajdhani, Saira, Saira_Stencil_One } from "next/font/google";
 import "./globals.css";
 import { Header } from "./components/header";
 import { Toaster } from "sonner"
+import { AuthProvider } from "@/context/context-auth";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,6 +13,29 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const fontTitle = Rajdhani({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  variable: '--font-title',
+});
+
+const fontBody = Inter({
+  subsets: ['latin'],
+  variable: '--font-body',
+});
+
+const sairaStencil = Saira_Stencil_One({
+  weight: ['400'],
+  subsets: ["latin"],
+  variable: "--font-saira-stencil"
+});
+
+const saira = Saira({
+  weight: ['400'],
+  subsets: ["latin"],
+  variable: "--font-saira"
 });
 
 export const metadata: Metadata = {
@@ -27,14 +51,26 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={
+          `
+          ${fontTitle.variable} 
+          ${fontBody.variable} 
+          ${sairaStencil.variable}
+          ${geistSans.variable} 
+          ${saira.variable}
+          ${geistMono.variable} 
+          antialiased
+          `
+        }
       >
-        <Toaster 
-          duration={3000}
-          position="top-right"
-        />
-        <Header />
-        {children}
+        <AuthProvider>
+          <Toaster 
+            duration={3000}
+            position="top-right"
+          />
+          <Header />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

@@ -5,12 +5,26 @@ import { RegisterFormDataType } from "../register-schema";
 export async function RegisterAction(body: RegisterFormDataType) {
   
   try {
-    const res = await api.post('/users', body)
-    
-    return res
+
+    const register =await api.post('/users', body)
+
+    if(register) {
+      return {
+        success: true,
+        message: 'User created successfully'
+      }
+    }else {
+      return {
+        success: false,
+        message: 'Failed to create user'
+      }
+    }
   }catch(err) {
     console.log(err)
-    throw new Error('Failed to create user')
+    return {
+      success: false,
+      message: 'Failed to create user'
+    }
   }
 
 }

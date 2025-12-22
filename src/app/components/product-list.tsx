@@ -32,7 +32,7 @@ export function ProductList({ data }: ProductsListProps) {
                 />
               </div>
 
-              <p className="pl-2 font-bold text-xl pt-2">
+              <p className="pl-2 font-bold text-xl pt-2 font-(family-name:--font-title)">
                 {truncate(item.name, 30)}
               </p>
 
@@ -43,12 +43,14 @@ export function ProductList({ data }: ProductsListProps) {
                 </div>
                 <div>
                   <p className="font-bold">
-                    <span className="text-cyan-400">{formatPrice(item.price)}</span>
+                    <span className="text-cyan-400 font-(family-name:--font-saira)">
+                      {formatPrice(item.price)}
+                    </span>
                   </p>
                 </div>
               </div>
             
-              <p className="text-[#97a0b7] pl-2 mt-1">
+              <p className="text-[#97a0b7] pl-2 mt-1 font-(family-name:--font-body)">
                 {truncate(item.description, 200)}
               </p>
 
@@ -59,7 +61,7 @@ export function ProductList({ data }: ProductsListProps) {
                   Adicionar ao carrinho
                 </button>
                 <button 
-                  className="w-1/2 py-2 cursor-pointer font-bold"
+                  className="w-1/2 py-2 cursor-pointer font-bold "
                 >
                   <Link href={`/detail/${item.id}`}>
                     Ver detalhes

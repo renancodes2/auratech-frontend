@@ -7,8 +7,15 @@
 
 @layer base {
   body {
-    @apply bg-[#000000] text-[#fff];
+    @apply bg-[#000000] text-[#ffffff];
   }
 }
 
+@theme {
+  --animate-shine: shine 3s linear infinite;
 
+  @keyframes shine {
+    from { background-position: 200% center; }
+    to { background-position: 0% center; }
+  }
+}
