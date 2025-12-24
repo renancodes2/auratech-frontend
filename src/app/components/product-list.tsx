@@ -1,3 +1,6 @@
+"use client"
+
+import { useCart } from "@/context/cart-context"
 import { Product } from "@/types/products"
 import { formatPrice } from "@/utils/format-price"
 import { truncate } from "@/utils/truncate"
@@ -12,9 +15,23 @@ interface ProductsListProps {
 
 export function ProductList({ data }: ProductsListProps) {
 
+  const { addToCart } = useCart()
+
   if(!data) {
     return <div>Error</div>
   }
+
+
+  function handleAddToCart(product: Product) {
+    addToCart({
+      id: product.id,
+      image: product.images[0],
+      name: product.name,
+      price: product.price,
+      description: product.description,
+    })
+  }
+
   return (
     <>
      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -37,9 +54,9 @@ export function ProductList({ data }: ProductsListProps) {
               </p>
 
               <div className="flex items-center justify-between px-2 my-2">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 font-(family-name:--font-saira)">
                   <FaStar size={20} color="#f7db15"/>
-                  <p>(530)</p>
+                  <p>4.8 (530)</p>
                 </div>
                 <div>
                   <p className="font-bold">
@@ -57,11 +74,12 @@ export function ProductList({ data }: ProductsListProps) {
               <div className="w-full flex items-center justify-between mt-4">
                 <button 
                   className="w-1/2 bg-[linear-gradient(90deg,#7c5cff,#4dd0e1)] text-[#061226] shadow-[0_6px_18px_rgba(124,92,255,0.18)] py-2 cursor-pointer font-bold"
+                  onClick={() => handleAddToCart(item)}
                 >
                   Adicionar ao carrinho
                 </button>
                 <button 
-                  className="w-1/2 py-2 cursor-pointer font-bold "
+                  className="w-1/2 py-2 cursor-pointer font-bold"
                 >
                   <Link href={`/detail/${item.id}`}>
                     Ver detalhes

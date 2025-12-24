@@ -5,9 +5,9 @@ import { useForm } from "react-hook-form";
 import z from "zod";
 
 export const formSchema = z.object({
-  name: z.string(),
-  email: z.string(),
-  password: z.string()
+  name: z.string().min(1, 'O campo nome é obrigatório'),
+  email: z.string().min(1, 'O campo email é obrigatório').email('Formato de email inválido'),
+  password: z.string().min(6, 'A senha deve ter no mínimo 6 caracteres')
 })
 
 export type RegisterFormDataType = z.infer<typeof formSchema>;

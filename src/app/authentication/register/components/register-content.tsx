@@ -25,7 +25,7 @@ export function RegisterContent() {
       throw Error(response.message || 'Failed to create user')
     }
 
-    router.push('/authenticarion/login')
+    router.push('/authentication/login')
   }
 
   return (
@@ -43,7 +43,7 @@ export function RegisterContent() {
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-500" />
                 </FormItem>
               )}
             />
@@ -56,7 +56,7 @@ export function RegisterContent() {
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-500" />
                 </FormItem>
               )}
             />
@@ -67,12 +67,19 @@ export function RegisterContent() {
                 <FormItem>
                   <FormLabel>Senha: </FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input {...field} type="password"/>
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-500" />
                 </FormItem>
               )}
             />
+
+            <p className="mt-2 text-sm text-center">
+              Já possui uma conta?{' '}
+              <a href="/authentication/login" className="text-blue-500 underline">
+                Faça login aqui
+              </a>
+            </p>
             <button 
               type="submit" 
               className="w-full bg-[linear-gradient(90deg,#7c5cff,#4dd0e1)] h-12 mt-3 rounded-md cursor-pointer"

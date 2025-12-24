@@ -3,7 +3,8 @@ import { Geist, Geist_Mono, Inter, Rajdhani, Saira, Saira_Stencil_One } from "ne
 import "./globals.css";
 import { Header } from "./components/header";
 import { Toaster } from "sonner"
-import { AuthProvider } from "@/context/context-auth";
+import { AuthProvider } from "@/context/auth-context";
+import { CartProvider } from "@/context/cart-context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -64,12 +65,14 @@ export default function RootLayout({
         }
       >
         <AuthProvider>
-          <Toaster 
-            duration={3000}
-            position="top-right"
-          />
-          <Header />
-          {children}
+          <CartProvider>
+            <Toaster 
+              duration={3000}
+              position="top-right"
+            />
+            <Header />
+            {children}
+          </CartProvider>
         </AuthProvider>
       </body>
     </html>

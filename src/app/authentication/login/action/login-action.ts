@@ -10,8 +10,16 @@ interface LoginActionData {
   token: string;
 }
 
-export const loginAction = async (data: LoginFormDataType) => {
+interface LoginActionResponse {
+  success: boolean;
+  user?: { 
+    name: string;
+    email: string;
+  };
+  message?: string;
+}
 
+export const loginAction = async (data: LoginFormDataType): Promise<LoginActionResponse> => {
   try {
     if(!data) {
       return { 

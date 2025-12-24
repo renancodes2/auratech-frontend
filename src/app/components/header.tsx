@@ -7,11 +7,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger
-} from "@/components/ui/hover-card";
 import { 
   FaBars,  
   FaBolt, 
@@ -19,24 +14,46 @@ import {
   FaShoppingBag, 
   FaUser 
 } from 'react-icons/fa'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { useAuth } from "@/context/context-auth";
+import { useEffect, useState } from "react";
+import { useAuth } from "@/context/auth-context";
 import Image from "next/image";
 import Avatar from "@/assets/sonic.png"
 import { FiLogOut } from 'react-icons/fi';
 import Link from 'next/link';
+import { useCart } from "@/context/cart-context";
 
 export function Header() {
   const pathname = usePathname();
   const isAuthPage = pathname === '/authentication/login' || pathname === '/authentication/register';
-  const [showModal, setShowModal] = useState(false)
-
+  const [showModal, setShowModal] = useState(false);
   const { user, handleLogout } = useAuth();
+  const [isClient, setIsClient] = useState(false);
+  const [quantity, setQuantity] = useState(0);
+  const { quantityInCart } = useCart()
+
+  useEffect(() => {
+      function setValues() {
+        setIsClient(true);
+        setQuantity(quantityInCart());
+    }
+    
+    setValues();
+  }, [quantityInCart]);
 
   if(isAuthPage) {
     return null;
   }
+
+  if (!isClient) {
+    return null;
+  }
+
 
   return (
     <>
@@ -73,20 +90,22 @@ export function Header() {
                 <FaShoppingBag size={24} color="#ddd" />
               </Link>
 
-              <p 
-                className="w-4 h-4 bg bg-[linear-gradient(90deg,#7c5cff,#4dd0e1)] text-[#061226] shadow-[0_6px_18px_rgba(124,92,255,0.18)] rounded-full flex items-center justify-center text-[10px] absolute left-3 top-4"
-              >
-                1
-              </p>
+              {quantity > 0 && (
+                <p
+                  className="w-4 h-4 bg-[linear-gradient(90deg,#7c5cff,#4dd0e1)] text-[#061226] shadow-[0_6px_18px_rgba(124,92,255,0.18)] rounded-full flex items-center justify-center text-[10px] absolute left-3 top-4"
+                >
+                  {quantity}
+                </p>
+              )}
             </div>
             <div className="cursor-pointer relative">
-              <HoverCard>
+              <Popover>
                 {!user ? (
-                  <HoverCardTrigger asChild>
+                  <PopoverTrigger asChild>
                     <FaUser size={24} color="#ddd" />
-                  </HoverCardTrigger> 
+                  </PopoverTrigger>
                 ): (
-                  <HoverCardTrigger asChild>
+                  <PopoverTrigger asChild>
                     <div>
                       <Image 
                         src={Avatar}
@@ -96,11 +115,11 @@ export function Header() {
                         className="rounded-full"
                       />
                     </div>
-                  </HoverCardTrigger>
+                  </PopoverTrigger>
                 )}
 
                 {user ? (
-                  <HoverCardContent className="bg-black">
+                  <PopoverContent className="bg-black">
                     <button 
                       onClick={handleLogout}
                       className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition"
@@ -108,9 +127,9 @@ export function Header() {
                       <FiLogOut size={20} color="#ddd" />
                       Sair da conta
                     </button>
-                  </HoverCardContent>
+                  </PopoverContent>
                 ): (
-                  <HoverCardContent className="bg-black">
+                  <PopoverContent className="bg-black">
                     <Link 
                       href={`/authentication/login`} 
                       className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition"
@@ -118,10 +137,10 @@ export function Header() {
                       <FiLogOut size={20} color="#ddd" />
                       Fazer Login
                     </Link>
-                  </HoverCardContent>
+                  </PopoverContent>
                 )}
 
-              </HoverCard>
+              </Popover>
 
               <p className="absolute left-4 top-4">
                 <FaChevronCircleDown size={15} color="#4dd0e1" />
@@ -138,12 +157,18 @@ export function Header() {
         </SheetHeader>
           <div className="flex items-center pl-3 gap-2">
             {!user ? (
-              <>
+              <Link 
+                href="/authentication/login"
+                className="flex items-center gap-2"
+              >
                 <FaUser size={24} color="#ddd" />
-                <p>Perfil</p>
-              </>
+                <p>Login</p>
+              </Link>
             ): (
-              <>
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 font-medium"
+              >
                 <Image 
                   src={Avatar}
                   alt="Avatar"
@@ -151,14 +176,17 @@ export function Header() {
                   height={24}
                   className="rounded-full"
                 />
-                <p>Perfil</p>
-              </>
+                <p>Sair da conta</p>
+              </button>
             )}
           </div>
-          <div className="flex items-center pl-3 gap-2">
+          <Link 
+            href="/cart"
+            className="flex items-center pl-3 gap-2"
+          >
             <FaShoppingBag size={24} color="#ddd" />
             <p>Carrinho</p>
-          </div>
+          </Link>
       </SheetContent>
     </Sheet>
     </>

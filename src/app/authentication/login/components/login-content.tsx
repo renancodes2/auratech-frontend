@@ -1,4 +1,5 @@
 "use client"
+
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useFormLogin } from "../login-schema";
@@ -24,7 +25,9 @@ export function LoginContent() {
   return (
     <main className="flex items-center justify-center h-screen">
       <div className="max-w-4xl shadow-md md:shadow-white p-10">
-        <h2 className="font-bold mb-10 text-center text-2xl">Login</h2>
+        <h2 className="font-bold mb-10 text-center text-2xl">
+          Login
+        </h2>
 
         <Form {...form} >
           <form onSubmit={form.handleSubmit(handleLogin)} className="flex flex-col gap-4">
@@ -48,17 +51,25 @@ export function LoginContent() {
                 <FormItem>
                   <FormLabel>Senha: </FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input {...field} type="password"/>
                   </FormControl>
                   <FormMessage className="text-red"/>
                 </FormItem>
               )}
             />
+
+            <p className="mt-2 text-sm">
+              Ainda não possui uma conta?{' '}
+              <a href="/authentication/register" className="text-blue-500 underline">
+                Registre-se aqui
+              </a>
+            </p>
+
             <button 
               type="submit" 
               className="w-full bg-[linear-gradient(90deg,#7c5cff,#4dd0e1)] h-12 mt-3 rounded-md cursor-pointer"
             >
-              Enviar
+              fazer login
             </button>
           </form>
         </Form>
