@@ -1,6 +1,6 @@
 ﻿# AuraTech - Frontend
 
- **Projeto em desenvolvimento inicial** **[Clique aqui para ver o inicio do site](https://auratech-frontend.vercel.app)**
+ ⚠️ **Projeto em desenvolvimento inicial** **[Clique aqui para ver o inicio do site](https://auratech-frontend.vercel.app)**
 
  ## 🏗️ Arquitetura do Gabinete
 
