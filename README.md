@@ -1,6 +1,20 @@
 ﻿# AuraTech - Frontend
 
- **Projeto em desenvolvimento inicial**
+ ⚠️ **Projeto em desenvolvimento inicial** **[Clique aqui para ver o inicio do site](https://auratech-frontend.vercel.app)**
+
+ ## 🏗️ Arquitetura do Gabinete
+
+Este projeto utiliza uma estrutura distribuída com integração contínua:
+
+* **Frontend:** [Next.js] hospedado na **Vercel**.
+* **Backend:** [NestJS](https://nestjs.com/) rodando em **Docker** no **Render**.
+* **Link do Backend:** [https://auratech-backend.onrender.com](https://github.com/renancodes2/auratech-backend)
+* **Banco de Dados:** PostgreSQL via **Neon DB**.
+
+## 🚀 Pipeline de CI/CD (GitHub Actions)
+1.  **O GitHub Actions** valida o código (Type Check com TypeScript).
+2.  **O Render** reconstrói a imagem Docker do backend e aplica as migrations do Prisma automaticamente.
+3.  **A Vercel** atualiza o frontend para refletir as mudanças.
 
  ![Aura Prism Tower](https://res.cloudinary.com/di1of4dwo/image/upload/v1766442074/jc8b3qxrc1tte5vzb7rd.jpg)
 
@@ -38,4 +52,4 @@ Frontend da aplicação AuraTech desenvolvido com **Next.js** e **React**.
 
 ## Deployment
 
- Hospedado em **Vercel** com CI/CD automático
+ Hospedado na **Vercel** com CI/CD automático
