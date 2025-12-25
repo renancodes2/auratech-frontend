@@ -36,7 +36,7 @@ export function CartContentItem({ data }: CartContentItemProps) {
             <FiTrash size={20} color="#ff4d4d" className="cursor-pointer"/>
           </button>
         </div>
-        <p className="text-sm text-[#97a0b7]">{truncate(data.description, 120)}</p>
+        <p className="text-sm text-[#97a0b7] max-w-2xl">{truncate(data.description, 120)}</p>
 
         <div className="bottom-0 flex items-center justify-between">
           <p className="text-sm font-(family-name:--font-saira)">
@@ -58,6 +58,7 @@ export function CartContentItem({ data }: CartContentItemProps) {
             </button>
           </div>
         </div>
+        <div className="w-full h-[1] bg-gray-400"></div>
       </div>
     </div>
   )
