@@ -1,16 +1,25 @@
 "use client"
 
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { 
+  Form, 
+  FormControl, 
+  FormField, 
+  FormItem, 
+  FormLabel, 
+  FormMessage 
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useFormLogin } from "../login-schema";
 import { LoginFormDataType } from "../login-schema";
 import { loginAction } from "../action/login-action";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { useAuth } from "@/context/auth-context";
 
 export function LoginContent() {
   const router = useRouter();
   const form = useFormLogin();
+  const { revalidateUser } = useAuth();
   
   const handleLogin = async (data: LoginFormDataType) => {
     const response = await loginAction(data);
@@ -18,6 +27,8 @@ export function LoginContent() {
       toast.error('Error ao fazer login')
       throw new Error(response?.message || 'Authentication failed. Could not generate token');
     }
+
+    await revalidateUser();
     toast.success('sucesso ao fazer login')
     router.push('/');
   }
@@ -60,7 +71,10 @@ export function LoginContent() {
 
             <p className="mt-2 text-sm">
               Ainda não possui uma conta?{' '}
-              <a href="/authentication/register" className="text-blue-500 underline">
+              <a
+                href="/authentication/register" 
+                className="text-blue-500 underline"
+              >
                 Registre-se aqui
               </a>
             </p>

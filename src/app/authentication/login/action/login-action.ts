@@ -34,7 +34,7 @@ export const loginAction = async (data: LoginFormDataType): Promise<LoginActionR
 
     if (token) {
       const expressTime = 60 * 60 * 24 * 30 * 1000;
-
+      
       const cookiesStore = await cookies();
 
       cookiesStore.set('session', token, {

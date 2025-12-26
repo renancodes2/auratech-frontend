@@ -79,13 +79,15 @@ export function CartProvider({ children }: { children: ReactNode}) {
     const subTotal = cart.reduce((acc, item) => {
       return acc + item.price * item.quantity
     }, 0)
-    return subTotal;
+
+    return subTotal
   }
 
   const calculateTotalWithTax = (taxa: number) => {
     const subTotal = cart.reduce((acc, item) => {
       return acc + item.price * item.quantity
     }, 0)
+
     return subTotal + taxa;
   }
 

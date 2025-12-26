@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from "react";
 import { deleteCookieClient, getCookieClient } from "@/lib/cookie-client";
 import { verifyTokenAndFetchUser } from "@/lib/verify-token-and-fetch-user";
 import { User } from "@/types/user";
@@ -10,6 +10,7 @@ interface AuthContextData {
   loading: boolean;
   isAuthenticated: boolean;
   handleLogout: () => void;
+  revalidateUser: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -18,22 +19,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function loadUser() {
-      try {
-        const token = await getCookieClient();
-        if (token) {
-          const userData = await verifyTokenAndFetchUser(token as string);
-          setUser(userData);
-        }
-      } catch (err) {
-        console.error("Erro ao carregar usuário", err);
-      } finally {
-        setLoading(false);
+const revalidateUser = useCallback(async () => {
+    setLoading(true);
+    try {
+      const token = await getCookieClient();
+      if (token) {
+        const userData = await verifyTokenAndFetchUser(token as string);
+        setUser(userData);
+      } else {
+        setUser(null);
       }
+    } catch (err) {
+      console.error("Erro ao validar usuário", err);
+      setUser(null);
+    } finally {
+      setLoading(false);
     }
-    loadUser();
   }, []);
+
+  useEffect(() => {
+    revalidateUser();
+  }, [revalidateUser]);
 
   function handleLogout() {
     deleteCookieClient();
@@ -47,6 +53,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         loading, 
         isAuthenticated: !!user, 
         handleLogout, 
+        revalidateUser
       }}>
       {children}
     </AuthContext.Provider>
