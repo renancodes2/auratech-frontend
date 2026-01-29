@@ -11,12 +11,14 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
     return <div>Produto não encontrado...</div>
   }
 
+  const optimizedUrl = product.imagesUrls[0].replace("/upload/", "/upload/f_auto,q_auto,w_800/")
+
   return (
     <main className="mt-10">
       <div className="max-w-3xl m-auto">
         <div className="relative max-w-3xl h-90 md:h-100 lg:150 bg-red-200 rounded-xl overflow-hidden text-yellow-500">
           <Image 
-            src={product.images[0]}
+            src={optimizedUrl}
             alt="Product Display"
             quality={100}
             fill

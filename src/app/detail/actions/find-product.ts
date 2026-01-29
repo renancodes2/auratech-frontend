@@ -4,7 +4,7 @@ import api from "@/utils/axios-instance"
 
 export const findProduct = async (id: string): Promise<Product | null> => {
   try {
-    return (await api.get(`/product/${id}`)).data;
+    return (await api.get(`/products/${id}`)).data;
   }catch(err) {
     console.log(err)
     return null;

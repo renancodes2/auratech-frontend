@@ -12,20 +12,29 @@ import { RegisterFormDataType, useFormRegister } from "../register-schema"
 import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import { RegisterAction } from "../action/action"
-
+import { toast } from "sonner"
+import { useAuth } from "@/context/auth-context"
 
 export function RegisterContent() {
   const router = useRouter();
   const form = useFormRegister()
+  const { revalidateUser } = useAuth();
   
   const handleRegister = async (form: RegisterFormDataType) => {
+    console.log('form data: ', form)
+
     const response = await RegisterAction(form)
 
-    if(!response || !response.success) {
-      throw Error(response.message || 'Failed to create user')
-    }
+    console.log(response)
 
-    router.push('/authentication/login')
+    if (!response || response.success === false) {
+      toast.error(response?.message || 'Falha ao criar usuário. Tente novamente.');
+      return;
+    }
+    await revalidateUser();
+    toast.success('sucesso ao se registrar');
+    router.push('/');
+
   }
 
   return (

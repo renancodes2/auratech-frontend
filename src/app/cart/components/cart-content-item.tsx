@@ -15,11 +15,13 @@ export function CartContentItem({ data }: CartContentItemProps) {
 
   const { addToCart, decrementItem, removeItem } = useCart();
 
+  const optimizedUrl = data.image.replace("/upload/", "/upload/f_auto,q_auto,w_800/")
+
   return (
     <div className="w-full flex justify-center rounded-lg">
       <div className="relative h-30 w-40">
         <Image
-          src={data.image}
+          src={optimizedUrl}
           alt="Product Display"
           quality={100}
           fill

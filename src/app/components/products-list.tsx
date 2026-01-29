@@ -12,7 +12,7 @@ interface ProductsListProps {
   data: Product[]
 }
 
-export function ProductList({ data }: ProductsListProps) {
+export function ProductsList({ data }: ProductsListProps) {
 
   const { addToCart } = useCart()
 
@@ -24,7 +24,7 @@ export function ProductList({ data }: ProductsListProps) {
   function handleAddToCart(product: Product) {
     addToCart({
       id: product.id,
-      image: product.images[0],
+      image: product.imagesUrls[0],
       name: product.name,
       price: product.price,
       description: product.description,
@@ -35,14 +35,16 @@ export function ProductList({ data }: ProductsListProps) {
     <>
      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         {data.map((item) => {
+          const optimizedUrl = item.imagesUrls[0].replace("/upload/", "/upload/f_auto,q_auto,w_800/")
           return (
             <div className="max-w-md flex flex-col" key={item.id}>
               <div className="relative w-full h-100 bg-red-200 rounded-xl overflow-hidden text-yellow-500">
                 <Image
-                  src={item.images[0]}
-                  alt="Product Display"
+                  src={optimizedUrl}
+                  alt="images"
                   quality={100}
                   fill
+                  unoptimized
                   className="object-cover rounded-lg"
                   priority
                 />

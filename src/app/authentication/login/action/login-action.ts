@@ -2,11 +2,10 @@
 
 import api from "@/utils/axios-instance";
 import { LoginFormDataType } from "../login-schema";
-import { cookies } from "next/headers";
+import { setSessionCookie } from "@/lib/auth";
 
 interface LoginActionData {
-  name: string;
-  email: string;
+  name: string
   token: string;
 }
 
@@ -14,7 +13,7 @@ interface LoginActionResponse {
   success: boolean;
   user?: { 
     name: string;
-    email: string;
+    token: string;
   };
   message?: string;
 }
@@ -28,27 +27,19 @@ export const loginAction = async (data: LoginFormDataType): Promise<LoginActionR
       }
     }
     
-    const response: LoginActionData = (await api.post('/auth', data)).data
+    const response: LoginActionData = (await api.post('/auth/login', data)).data
 
-    const token = response.token;
+    const token = response.token
 
     if (token) {
-      const expressTime = 60 * 60 * 24 * 30 * 1000;
-      
-      const cookiesStore = await cookies();
 
-      cookiesStore.set('session', token, {
-        maxAge: expressTime,
-        path: "/",
-        httpOnly: false,
-        secure: process.env.NODE_ENV === "production"
-      });
+      await setSessionCookie(token);
       
-      const { email, name } = response;
+      const { name } = response;
 
       return { success: true, user: {
         name,
-        email
+        token
       }};
     }
 
