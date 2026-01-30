@@ -7,9 +7,9 @@
 Este projeto utiliza uma estrutura distribuída com integração contínua:
 
 * **Frontend:** [Next.js] hospedado na **Vercel**.
-* **Backend:** [NestJS](https://nestjs.com/) rodando em **Docker** no **Render**.
-* **Link do Backend:** [https://auratech-backend.onrender.com](https://github.com/renancodes2/auratech-backend)
-* **Banco de Dados:** PostgreSQL via **Neon DB**.
+* **Backend:** [Spring Boot(Java 21)](https://nestjs.com/) rodando em **Docker** no **Render**.
+* **Link do Backend:** [auratech-api-spring](https://github.com/renancodes2/auratech-api-spring)
+* **Banco de Dados:** PostgreSQL via **Neon(aws)**.
 
 ## 🚀 Pipeline de CI/CD (GitHub Actions)
 1.  **O GitHub Actions** valida o código (Type Check com TypeScript).
