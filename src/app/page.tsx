@@ -2,7 +2,8 @@ import { Product } from "@/types/products";
 import api from "@/utils/axios-instance";
 import { ProductsList } from "./components/products-list";
 
-export const revalidate = 120;
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 const findAllProducts = async (): Promise<Product[]> => { 
   try {
