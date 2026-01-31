@@ -7,7 +7,7 @@
 Este projeto utiliza uma estrutura distribuída com integração contínua:
 
 * **Frontend:** [Next.js] hospedado na **Vercel**.
-* **Backend:** [Spring Boot(Java 21)](https://nestjs.com/) rodando em **Docker** no **Render**.
+* **Backend:** **Spring Boot(Java 21)** rodando em **Docker** no **Render**.
 * **Link do Backend:** [auratech-api-spring](https://github.com/renancodes2/auratech-api-spring)
 * **Banco de Dados:** PostgreSQL via **Neon(aws)**.
 
