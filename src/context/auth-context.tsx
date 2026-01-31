@@ -20,12 +20,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
 const revalidateUser = useCallback(async () => {
+    // console.log("================================================================1111111111")
     setLoading(true);
     try {
       const token = await getCookieClient();
+      console.log(token)
       if (token) {
         const userData = await verifyTokenAndFetchUser(token as string);
         setUser(userData);
+
+        // console.log("======================" + userData)
       } else {
         setUser(null);
       }
