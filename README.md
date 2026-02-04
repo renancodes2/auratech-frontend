@@ -41,7 +41,6 @@ Frontend da aplicação AuraTech desenvolvido com **Next.js** e **React**.
 ### Interface de Usuário
 - Componentes UI baseados em shadcn/ui
 - Componentes customizados e reutilizáveis
-- Responsivos e bem estilizados
 
 ### Infraestrutura
 - Next.js com App Router
