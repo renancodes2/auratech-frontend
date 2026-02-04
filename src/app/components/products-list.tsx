@@ -35,16 +35,14 @@ export function ProductsList({ data }: ProductsListProps) {
     <>
      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         {data.map((item) => {
-          const optimizedUrl = item.imagesUrls[0].replace("/upload/", "/upload/f_auto,q_auto,w_800/")
           return (
             <div className="max-w-md flex flex-col" key={item.id}>
               <div className="relative w-full h-100 bg-red-200 rounded-xl overflow-hidden text-yellow-500">
                 <Image
-                  src={optimizedUrl}
+                  src={item.imagesUrls[0]}
                   alt="images"
                   quality={100}
                   fill
-                  unoptimized
                   className="object-cover rounded-lg"
                   priority
                 />
