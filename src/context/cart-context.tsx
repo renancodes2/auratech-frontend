@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from "react";
 
 export interface CartItemData {
   id: string;
@@ -90,7 +90,7 @@ export function CartProvider({ children }: { children: ReactNode}) {
 
     return subTotal + taxa;
   }
-
+  
   function quantityInCart() {
     return cart.length;
   }
@@ -104,7 +104,7 @@ export function CartProvider({ children }: { children: ReactNode}) {
         calculateSubtotal, 
         calculateTotalWithTax,
         removeItem,
-        quantityInCart
+        quantityInCart,
       }}
     >
       {children}
