@@ -77,7 +77,7 @@ export function ProductContent({ product }: ProductContentProps) {
             <h2 
               className="text-3xl text-center xl:text-start font-medium font-(family-name:--font-title)"
               >
-                {product.name.toUpperCase()}
+                {product?.name.toUpperCase()}
             </h2>
             <p className="text-[#97a0b7] pl-2 max-w-2xl text-justify mt-5 mx-auto font-(family-name:--font-body)">
                 {truncate(product.description, descriptionLimit)} 
@@ -90,13 +90,13 @@ export function ProductContent({ product }: ProductContentProps) {
             <div className="flex items-center justify-between px-2 my-4 font-(family-name:--font-saira)">
               <div className="flex items-center gap-1 bg-gray-800 p-1 rounded-md">
                 <p>
-                  {product.category.name.toUpperCase()}
+                  {product?.category.toUpperCase()}
                 </p>
               </div>
               <div>
                 <p className="bg-gray-800 p-1 rounded-md">
                   <span>
-                    STOCK: {product.stock}
+                    STOCK: {product?.stock}
                   </span>
                 </p>
               </div>
@@ -109,7 +109,7 @@ export function ProductContent({ product }: ProductContentProps) {
               <div>
                 <p className="font-bold">
                   <span className="text-cyan-400 font-(family-name:--font-saira)">
-                    {formatPrice(product.price)}
+                    {formatPrice(product?.price)}
                   </span>
                 </p>
               </div>
