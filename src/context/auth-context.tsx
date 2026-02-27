@@ -20,7 +20,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
 const revalidateUser = useCallback(async () => {
-    // console.log("================================================================1111111111")
     setLoading(true);
     try {
       const token = await getCookieClient();
@@ -29,7 +28,6 @@ const revalidateUser = useCallback(async () => {
         const userData = await verifyTokenAndFetchUser(token as string);
         setUser(userData);
 
-        // console.log("======================" + userData)
       } else {
         setUser(null);
       }

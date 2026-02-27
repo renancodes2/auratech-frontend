@@ -16,8 +16,6 @@ export async function verifyTokenAndFetchUser(token: string): Promise<User | nul
       }
     );
 
-    console.log('user fetched by token: ================================================================================================================== ', user);
-
     if(user) return user.data;
 
     return null;
