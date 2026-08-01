@@ -2,7 +2,7 @@
 
  ⚠️ **Algumas partes da estilização do front ainda não estão 100%, pois meu foco no momento é agilizar o back**
  
- ⚠️ **Projeto em desenvolvimento inicial** **[Clique aqui para ver o inicio do site](https://auratech-frontend.vercel.app)**
+ ⚠️ **Projeto em desenvolvimento inicial**
 
  ## 🏗️ Arquitetura do Gabinete
 
